@@ -12,3 +12,21 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model user {
+  id               Int    @id @default(autoincrement())
+  email            String @unique @db.VarChar(255)
+  phash            String
+  wins             Int    @default(0)
+  losses           Int    @default(0)
+  streak           Int    @default(0)
+  lifeStreak       Int    @default(0)
+  lifeScore        Int    @default(0)
+  highScore        Int    @default(0)
+  lifeWords        Int    @default(0)
+  lifeKeyWords     Int    @default(0)
+  quickSolve       Int    @default(0)
+  averageSolve     Int    @default(0)
+  lifePlaytime     Int    @default(0)
+  conquestProgress Int    @default(0)
+}
