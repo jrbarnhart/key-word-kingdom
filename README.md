@@ -53,7 +53,7 @@ This is a full-stack project created with Next.js that allows users to play a wo
   ```
   3. Create a .env.local file in the project's root directory with the following contents:
   ```
-    DATABASE_CONNECTION_STRING: "your:database/string"
+    DATABASE_URL: "your:database/string"
     SESSION_SECRET: "yourSessionSecret"
   ```
   4. Start the dev server:
