@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Key Word Kingdom
 
-## Getting Started
+## Overview
 
-First, run the development server:
+This is a full-stack project created with Next.js that allows users to play a word guessing game. Progress and stats are saved to the server and made visible to users on their profile.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Game Basics
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Objective**: Guess the secret Key Word before time runs out.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Gameplay**:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- A Key Word is chosen from a list of words.
+- Players are presented with a set of unique characters from the Key Word.
+- The length of the Key Word is shown as underscores.
+- Players use the provided characters to guess words.
+- Correct letter placements from guesses are revealed on the Key Word display.
 
-## Learn More
+**Scoring**:
 
-To learn more about Next.js, take a look at the following resources:
+- Points are awarded for each valid word guessed
+- The timer is also extended for vlaid guesses
+- Correctly guessing all Key Words completes the level
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Difficulty**:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- As difficulty increases the Key Words become longer and the timer gets shorter
+- Users can start a round with custom difficulty settings in Custom Mode
+- Users can disable the timer in Custom Mode
+- Users can also play Conquest Mode where the difficulty increases per level completed
 
-## Deploy on Vercel
+## Project Details
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Tech Used**:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Next.js - Full-stack React framework
+- TailwindCSS - Utility class based style library
+- Postgres & Prisma - SQL Database and ORM
+- Shadcn UI - React component library
+
+**Getting Started**:
+
+- Play the game live on my [Personal Portfolio (NYI)](https://www.joshuarbarnhart.com)
+
+- To run locally:
+  1. Clone the repo to the desired location:
+  ```
+  git clone https://github.com/jrbarnhart/key-word-kingdom.git
+  ```
+  2. Install dependencies:
+  ```
+  npm i
+  ```
+  3. Create a .env file in the project's root directory with the following contents:
+  ```
+    DATABASE_CONNECTION_STRING: "your:database/string"
+    SESSION_SECRET: "yourSessionSecret"
+  ```
+  4. Start the dev server:
+  ```
+    npm run dev
+  ```
+  5. Navigate to the url displayed in the console to access the app.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
