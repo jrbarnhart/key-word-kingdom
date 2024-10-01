@@ -23,7 +23,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="absolute bottom-4 text-gray-300">
-        <p>© 2024 Key Word Kingdom</p>
+        <a href={"https://www.joshuarbarnhart.com"}>My Portfolio</a>
       </footer>
     </div>
   );
