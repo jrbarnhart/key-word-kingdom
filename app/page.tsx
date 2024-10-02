@@ -1,6 +1,8 @@
-import Link from "next/link";
+import { auth, signIn, signOut } from "@/auth";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-blue-600 to-purple-800">
       {/* Logo / Title */}
@@ -13,12 +15,30 @@ export default function Home() {
 
       {/* Call to Action */}
       <div className="space-y-4">
-        <Link
-          href={"/game"}
-          className="px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold rounded-md shadow-lg"
-        >
-          Start Game
-        </Link>
+        {session?.user ? (
+          <form
+            action={async () => {
+              "use server";
+              await signOut();
+            }}
+          >
+            <button type="submit">Sign Out</button>
+          </form>
+        ) : (
+          <form
+            action={async () => {
+              "use server";
+              await signIn("google");
+            }}
+          >
+            <button
+              type="submit"
+              className="px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold rounded-md shadow-lg"
+            >
+              Sign In with Google
+            </button>
+          </form>
+        )}
       </div>
 
       {/* Footer */}
