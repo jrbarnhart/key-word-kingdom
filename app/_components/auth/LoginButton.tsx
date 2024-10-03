@@ -1,11 +1,15 @@
 import { signIn } from "@/auth";
 
-export default function LoginButton() {
+export default function LoginButton({ redirect }: { redirect?: string }) {
   return (
     <form
       action={async () => {
         "use server";
-        await signIn("google");
+        if (redirect) {
+          await signIn("google", { redirectTo: redirect });
+        } else {
+          await signIn("google");
+        }
       }}
     >
       <button
