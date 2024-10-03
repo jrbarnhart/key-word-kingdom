@@ -1,9 +1,23 @@
-export default function Game() {
+import { auth } from "@/auth";
+import LoginButton from "../_components/auth/LoginButton";
+
+export default async function Game() {
+  const session = await auth();
+
+  if (!session?.user) {
+    return (
+      <div>
+        <p>Please Sign In to play.</p>
+        <LoginButton />
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-black text-white flex flex-col items-center">
+    <div className="text-white flex flex-col items-center">
       <div className="max-w-lg w-full h-screen flex flex-col p-4 ">
         <div className="text-center mb-4">
-          <h1 className="text-2xl font-bold">Game</h1>
+          <h1 className="mt-16 text-2xl font-bold">Game</h1>
           <div className="flex justify-between text-sm">
             <p>Score: 42069</p>
             <p>1:04</p>
