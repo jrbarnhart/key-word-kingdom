@@ -1,11 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import useScore from "./useScore";
 import useTimer from "./useTimer";
 
 export default function GameBoard({ ...props }: { keyWords: string[] }) {
   const { keyWords } = props;
-
+  const [currentKeyWord, setCurrentKeyWord] = useState(0);
+  const [hint, setHint] = useState(keyWords[0].split("").map(() => " "));
   const timer = useTimer(55.5);
   const score = useScore();
 
@@ -18,15 +20,16 @@ export default function GameBoard({ ...props }: { keyWords: string[] }) {
             <p>Score: {score.value}</p>
             <p>{timer.formatted}</p>
           </div>
-          <p className="text-blue-400 text-sm">Words: 6 1/3</p>
+          <p className="text-blue-400 text-sm">
+            KeyWord {currentKeyWord + 1} / {keyWords.length}
+          </p>
         </div>
-        <div className="flex justify-center space-x-2 text-3xl mb-6">
-          <span className="border-b-2 border-white px-2">T</span>
-          <span className="border-b-2 border-white px-2">_</span>
-          <span className="border-b-2 border-white px-2">_</span>
-          <span className="border-b-2 border-white px-2">_</span>
-          <span className="border-b-2 border-white px-2">_</span>
-          <span className="border-b-2 border-white px-2">X</span>
+        <div className="flex justify-center space-x-2 text-3xl my-6">
+          {hint.map((char, index) => (
+            <span className="border-b-2 border-white px-2" key={index}>
+              {char}
+            </span>
+          ))}
         </div>
         <div className="bg-gray-800 rounded-lg p-4 mb-6">
           <ul className="text-blue-400 space-y-1">
