@@ -1,9 +1,12 @@
 import { auth } from "@/auth";
 import LoginButton from "../_components/auth/LoginButton";
 import GameBoard from "./GameBoard";
+import getRandomWords from "./getRandomWords";
 
 export default async function Game() {
   const session = await auth();
+
+  const keyWords = await getRandomWords(3);
 
   if (!session?.user) {
     return (
@@ -16,5 +19,5 @@ export default async function Game() {
     );
   }
 
-  return <GameBoard />;
+  return <GameBoard keyWords={keyWords} />;
 }

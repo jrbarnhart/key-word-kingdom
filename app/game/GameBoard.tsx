@@ -1,12 +1,22 @@
-export default function GameBoard() {
+"use client";
+
+import useScore from "./useScore";
+import useTimer from "./useTimer";
+
+export default function GameBoard({ ...props }: { keyWords: string[] }) {
+  const { keyWords } = props;
+
+  const timer = useTimer(55.5);
+  const score = useScore();
+
   return (
     <div className="text-white flex flex-col items-center">
       <div className="max-w-lg w-full h-screen flex flex-col p-4 ">
         <div className="text-center mb-4">
-          <h1 className="mt-16 text-2xl font-bold">Key Word Kingdom</h1>
+          <h1 className="mt-10 text-2xl font-bold">Key Word Kingdom</h1>
           <div className="flex justify-between text-sm">
-            <p>Score: 42069</p>
-            <p>1:04</p>
+            <p>Score: {score.value}</p>
+            <p>{timer.formatted}</p>
           </div>
           <p className="text-blue-400 text-sm">Words: 6 1/3</p>
         </div>
@@ -20,9 +30,9 @@ export default function GameBoard() {
         </div>
         <div className="bg-gray-800 rounded-lg p-4 mb-6">
           <ul className="text-blue-400 space-y-1">
-            <li>Word</li>
-            <li>Another</li>
-            <li>Thing</li>
+            {keyWords.map((word, index) => (
+              <p key={index}>{word[0].toUpperCase() + word.slice(1)}</p>
+            ))}
           </ul>
         </div>
         <div className="mt-auto">

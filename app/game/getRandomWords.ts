@@ -19,5 +19,5 @@ export default async function getRandomWords(count: number = 1) {
     randomWords.push(splitFile[Math.floor(Math.random() * splitFile.length)]);
   }
 
-  console.log(randomWords);
+  return randomWords;
 }
