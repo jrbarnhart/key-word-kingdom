@@ -4,7 +4,7 @@ export default function useTimer(
   startsAt: number = 0,
   countDown: boolean = false
 ) {
-  const [time, setTime] = useState(startsAt ? startsAt : 0);
+  const [time, setTime] = useState(startsAt && startsAt >= 0 ? startsAt : 0);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
