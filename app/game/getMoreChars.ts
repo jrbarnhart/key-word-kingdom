@@ -23,9 +23,6 @@ export function getMoreChars(keyWord: string, count: number = 9) {
     alphaSet.delete(randomChar);
   }
 
-  const chars = Array.from(uniqueCharSet);
-
-  console.log(chars);
-
+  const chars = Array.from(uniqueCharSet).sort(() => Math.random() - 0.5);
   return chars;
 }
