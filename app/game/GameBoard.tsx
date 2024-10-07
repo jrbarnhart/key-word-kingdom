@@ -1,15 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useScore from "./useScore";
 import useTimer from "./useTimer";
+import { getMoreChars } from "./getMoreChars";
 
 export default function GameBoard({ ...props }: { keyWords: string[] }) {
   const { keyWords } = props;
+  const [chars, setChars] = useState<string[]>([]);
   const [currentKeyWord, setCurrentKeyWord] = useState(0);
   const [hint, setHint] = useState(keyWords[0].split("").map(() => " "));
   const timer = useTimer(55.5);
   const score = useScore();
+
+  useEffect(() => {
+    setChars(getMoreChars(keyWords[0], 26));
+  }, [keyWords]);
 
   return (
     <div className="text-white flex flex-col items-center">
@@ -31,33 +37,41 @@ export default function GameBoard({ ...props }: { keyWords: string[] }) {
             </span>
           ))}
         </div>
-        <div className="bg-gray-800 rounded-lg p-4 mb-6">
+        <div className="bg-gray-800 rounded-lg p-4 mb-6 flex-grow h-full">
           <ul className="text-blue-400 space-y-1">
             {keyWords.map((word, index) => (
               <p key={index}>{word[0].toUpperCase() + word.slice(1)}</p>
             ))}
           </ul>
         </div>
-        <div className="mt-auto">
-          <div className="grid grid-cols-3 gap-2 mb-2">
-            <button className="bg-blue-500 rounded-lg py-2 text-xl">T</button>
-            <button className="bg-blue-500 rounded-lg py-2 text-xl">A</button>
-            <button className="bg-blue-500 rounded-lg py-2 text-xl">Y</button>
+        <div className="h-full flex flex-col justify-end gap-3">
+          <div className="h-full flex flex-wrap justify-center content-end gap-2">
+            {/* map chars to buttons here */}
+            {chars.map((char, index) => {
+              return (
+                <button
+                  key={index}
+                  className={`${
+                    chars.length >= 20
+                      ? "w-11 h-11 sm:w-14 sm:h-14 md:w-16 md:h-16"
+                      : chars.length >= 15
+                      ? "w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20"
+                      : chars.length >= 10
+                      ? "w-14 h-14 sm:w-16 sm:h-16 md:w-24 md:h-24"
+                      : "w-16 h-16 sm:w-18 sm:h-18 md:w-24 md:h-24 lg:w-28 lg:h-28"
+                  } bg-blue-500 rounded-full`}
+                >
+                  {char}
+                </button>
+              );
+            })}
           </div>
-          <div className="grid grid-cols-3 gap-2 mb-2">
-            <button className="bg-blue-500 rounded-lg py-2 text-xl">W</button>
-            <button className="bg-blue-500 rounded-lg py-2 text-xl">X</button>
-            <button className="bg-blue-500 rounded-lg py-2 text-xl">R</button>
-          </div>
-          <div className="grid grid-cols-3 gap-2 mb-2">
-            <button className="bg-blue-500 rounded-lg py-2 text-xl">U</button>
-            <button className="bg-blue-500 rounded-lg py-2 text-xl">N</button>
-            <button className="bg-blue-500 rounded-lg py-2 text-xl">F</button>
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            <button className="bg-blue-500 rounded-lg py-2 text-xl">||</button>
-            <button className="bg-blue-500 rounded-lg py-2 text-xl">
-              Entr
+          <div className="flex gap-3 justify-around">
+            <button className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-red-500 rounded-full">
+              DEL
+            </button>
+            <button className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-green-500 rounded-full">
+              ↵
             </button>
           </div>
         </div>
