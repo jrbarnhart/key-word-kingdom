@@ -1,17 +1,24 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import useScore from "./useScore";
 import useTimer from "./useTimer";
 import useChars from "./useChars";
 import useKeyboard from "./useKeyboard";
+import useDisplayChars from "./useDisplayChars";
 
 export default function GameBoard({ ...props }: { keyWords: string[] }) {
   const { keyWords } = props;
   const chars = useChars({ keyWords, charTarget: 9 });
   const [currentKeyWordIndex, setCurrentKeyWordIndex] = useState(0);
-  const [hint, setHint] = useState(keyWords[0].split("").map(() => " "));
+  const [hint, setHint] = useState(keyWords[0].split("").map(() => "\u00A0"));
   const [currentInput, setCurrentInput] = useState<string[]>([]);
+  const displayChars = useDisplayChars({
+    currentInput,
+    currentKeyWordIndex,
+    hint,
+    keyWords,
+  });
   const [guesses, setGuesses] = useState<string[]>([]);
   const timer = useTimer();
   const score = useScore();
@@ -37,8 +44,11 @@ export default function GameBoard({ ...props }: { keyWords: string[] }) {
           </p>
         </div>
         <div className="flex justify-center space-x-2 text-3xl my-6">
-          {hint.map((char, index) => (
-            <span className="border-b-2 border-white px-2" key={index}>
+          {displayChars.map((char, index) => (
+            <span
+              className="border-b-2 border-white px-2 font-mono"
+              key={index}
+            >
               {char}
             </span>
           ))}
@@ -52,7 +62,6 @@ export default function GameBoard({ ...props }: { keyWords: string[] }) {
         </div>
         <div className="h-full flex flex-col justify-end gap-3">
           <div className="h-full flex flex-wrap justify-center content-end gap-2">
-            {/* map chars to buttons here */}
             {chars.values.map((char, index) => {
               return (
                 <button
