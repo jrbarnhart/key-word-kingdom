@@ -7,7 +7,7 @@ export default function useScore() {
     setValue((prev) => prev + val);
   };
 
-  const score = { value, add };
+  const score = { value, setValue, add };
 
   return score;
 }
