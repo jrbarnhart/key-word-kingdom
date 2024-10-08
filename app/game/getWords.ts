@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 
-export default async function getRandomWords(count: number = 1) {
+export default async function getWords(count: number = 1) {
   const file = await fs.readFile(
     process.cwd() + "/app/_lib/2of12inf.txt",
     "utf8"
@@ -19,5 +19,6 @@ export default async function getRandomWords(count: number = 1) {
     randomWords.push(splitFile[Math.floor(Math.random() * splitFile.length)]);
   }
 
-  return randomWords;
+  const words = { wordArray: splitFile, keyWords: randomWords };
+  return words;
 }
