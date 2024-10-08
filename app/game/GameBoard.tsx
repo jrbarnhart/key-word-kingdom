@@ -6,9 +6,15 @@ import useTimer from "./useTimer";
 import useChars from "./useChars";
 import useKeyboard from "./useKeyboard";
 import useDisplayChars from "./useDisplayChars";
+import buttonHandlers from "./buttonHandlers";
 
-export default function GameBoard({ ...props }: { keyWords: string[] }) {
-  const { keyWords } = props;
+export default function GameBoard({
+  ...props
+}: {
+  keyWords: string[];
+  wordArray: string[];
+}) {
+  const { keyWords, wordArray } = props;
   const chars = useChars({ keyWords, charTarget: 9 });
   const [currentKeyWordIndex, setCurrentKeyWordIndex] = useState(0);
   const [hint, setHint] = useState(keyWords[0].split("").map(() => "\u00A0"));
@@ -29,6 +35,9 @@ export default function GameBoard({ ...props }: { keyWords: string[] }) {
     keyWords,
     setCurrentInput,
   });
+
+  const { handleCharButton, handleDelButton, handleEnterButton } =
+    buttonHandlers({ currentKeyWordIndex, keyWords, setCurrentInput });
 
   return (
     <div className="text-white flex flex-col items-center">
@@ -66,6 +75,7 @@ export default function GameBoard({ ...props }: { keyWords: string[] }) {
               return (
                 <button
                   key={index}
+                  onClick={(e) => handleCharButton(e, char)}
                   className={`${
                     chars.values.length >= 20
                       ? "w-11 h-11 sm:w-14 sm:h-14 md:w-16 md:h-16"
@@ -82,10 +92,16 @@ export default function GameBoard({ ...props }: { keyWords: string[] }) {
             })}
           </div>
           <div className="flex gap-3 justify-around">
-            <button className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-red-500 rounded-full">
+            <button
+              onClick={handleDelButton}
+              className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-red-500 rounded-full"
+            >
               DEL
             </button>
-            <button className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-green-500 rounded-full">
+            <button
+              onClick={handleEnterButton}
+              className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-green-500 rounded-full"
+            >
               ↵
             </button>
           </div>
