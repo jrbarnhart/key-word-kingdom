@@ -19,5 +19,5 @@ export default async function Game() {
     );
   }
 
-  return <GameBoard keyWords={words.keyWords} />;
+  return <GameBoard keyWords={words.keyWords} wordArray={words.wordArray} />;
 }
