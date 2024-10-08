@@ -1,17 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import useScore from "./useScore";
 import useTimer from "./useTimer";
 import useChars from "./useChars";
+import useKeyboard from "./useKeyboard";
 
 export default function GameBoard({ ...props }: { keyWords: string[] }) {
   const { keyWords } = props;
   const chars = useChars({ keyWords, charTarget: 9 });
-  const [currentKeyWord, setCurrentKeyWord] = useState(0);
+  const [currentKeyWordIndex, setCurrentKeyWordIndex] = useState(0);
   const [hint, setHint] = useState(keyWords[0].split("").map(() => " "));
+  const [currentInput, setCurrentInput] = useState<string[]>([]);
+  const [guesses, setGuesses] = useState<string[]>([]);
   const timer = useTimer();
   const score = useScore();
+
+  useKeyboard({
+    charValues: chars.values,
+    currentKeyWordIndex,
+    keyWords,
+    setCurrentInput,
+  });
 
   return (
     <div className="text-white flex flex-col items-center">
@@ -23,7 +33,7 @@ export default function GameBoard({ ...props }: { keyWords: string[] }) {
             <p>{timer.formatted}</p>
           </div>
           <p className="text-blue-400 text-sm">
-            KeyWord {currentKeyWord + 1} / {keyWords.length}
+            KeyWord {currentKeyWordIndex + 1} / {keyWords.length}
           </p>
         </div>
         <div className="flex justify-center space-x-2 text-3xl my-6">
