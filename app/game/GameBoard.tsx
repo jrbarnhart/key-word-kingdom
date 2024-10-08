@@ -7,7 +7,7 @@ import useChars from "./useChars";
 import useKeyboard from "./useKeyboard";
 import useDisplayChars from "./useDisplayChars";
 import buttonHandlers from "./buttonHandlers";
-import createCheckGuess from "./checkGuess";
+import createCheckGuess from "./createCheckGuess";
 
 export default function GameBoard({
   ...props
