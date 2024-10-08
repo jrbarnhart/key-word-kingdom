@@ -7,6 +7,7 @@ import useChars from "./useChars";
 import useKeyboard from "./useKeyboard";
 import useDisplayChars from "./useDisplayChars";
 import buttonHandlers from "./buttonHandlers";
+import createCheckGuess from "./checkGuess";
 
 export default function GameBoard({
   ...props
@@ -29,11 +30,20 @@ export default function GameBoard({
   const timer = useTimer();
   const score = useScore();
 
+  const checkGuess = createCheckGuess({
+    keyWord: keyWords[currentKeyWordIndex],
+    currentInput,
+    wordArray,
+    setScore: score.setValue,
+    setGuesses,
+  });
+
   useKeyboard({
     charValues: chars.values,
     currentKeyWordIndex,
     keyWords,
     setCurrentInput,
+    checkGuess,
   });
 
   const { handleCharButton, handleDelButton, handleEnterButton } =
@@ -52,15 +62,17 @@ export default function GameBoard({
             KeyWord {currentKeyWordIndex + 1} / {keyWords.length}
           </p>
         </div>
-        <div className="flex justify-center space-x-2 text-3xl my-6">
-          {displayChars.map((char, index) => (
-            <span
-              className="border-b-2 border-white px-2 font-mono"
-              key={index}
-            >
-              {char}
-            </span>
-          ))}
+        <div className="flex justify-center space-x-2 text-2xl my-6">
+          <p className="flex flex-wrap gap-1">
+            {displayChars.map((char, index) => (
+              <span
+                className="border-b-2 border-white px-2 font-mono"
+                key={index}
+              >
+                {char}
+              </span>
+            ))}
+          </p>
         </div>
         <div className="bg-gray-800 rounded-lg p-4 mb-6 flex-grow h-full">
           <ul className="text-blue-400 space-y-1">
