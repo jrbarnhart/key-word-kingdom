@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 
-export default function useTimer(
-  startsAt: number = 0,
-  countDown: boolean = false
-) {
+export default function useTimer({
+  startsAt = 0,
+  countDown = false,
+}: {
+  startsAt?: number;
+  countDown?: boolean;
+} = {}) {
   const [time, setTime] = useState(
     startsAt && startsAt >= 0 ? Math.floor(startsAt) : 0
   );
