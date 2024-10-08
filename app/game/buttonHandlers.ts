@@ -4,10 +4,12 @@ export default function buttonHandlers({
   setCurrentInput,
   keyWords,
   currentKeyWordIndex,
+  checkGuess,
 }: {
   setCurrentInput: React.Dispatch<SetStateAction<string[]>>;
   keyWords: string[];
   currentKeyWordIndex: number;
+  checkGuess: () => boolean;
 }) {
   const handleCharButton = (
     event: React.MouseEvent<HTMLButtonElement>,
@@ -33,7 +35,9 @@ export default function buttonHandlers({
   };
 
   const handleEnterButton = () => {
-    // Handle a guess input here
+    if (checkGuess()) {
+      setCurrentInput([]);
+    }
   };
 
   const buttonHandlers = {

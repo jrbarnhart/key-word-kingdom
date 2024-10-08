@@ -47,7 +47,12 @@ export default function GameBoard({
   });
 
   const { handleCharButton, handleDelButton, handleEnterButton } =
-    buttonHandlers({ currentKeyWordIndex, keyWords, setCurrentInput });
+    buttonHandlers({
+      currentKeyWordIndex,
+      keyWords,
+      setCurrentInput,
+      checkGuess,
+    });
 
   return (
     <div className="text-white flex flex-col items-center">
