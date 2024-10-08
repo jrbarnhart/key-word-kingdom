@@ -1,21 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useScore from "./useScore";
 import useTimer from "./useTimer";
-import { getMoreChars } from "./getMoreChars";
+import useChars from "./useChars";
 
 export default function GameBoard({ ...props }: { keyWords: string[] }) {
   const { keyWords } = props;
-  const [chars, setChars] = useState<string[]>([]);
+  const chars = useChars({ keyWords, charTarget: 9 });
   const [currentKeyWord, setCurrentKeyWord] = useState(0);
   const [hint, setHint] = useState(keyWords[0].split("").map(() => " "));
-  const timer = useTimer(55.5);
+  const timer = useTimer();
   const score = useScore();
-
-  useEffect(() => {
-    setChars(getMoreChars(keyWords[0], 26));
-  }, [keyWords]);
 
   return (
     <div className="text-white flex flex-col items-center">
@@ -47,16 +43,16 @@ export default function GameBoard({ ...props }: { keyWords: string[] }) {
         <div className="h-full flex flex-col justify-end gap-3">
           <div className="h-full flex flex-wrap justify-center content-end gap-2">
             {/* map chars to buttons here */}
-            {chars.map((char, index) => {
+            {chars.values.map((char, index) => {
               return (
                 <button
                   key={index}
                   className={`${
-                    chars.length >= 20
+                    chars.values.length >= 20
                       ? "w-11 h-11 sm:w-14 sm:h-14 md:w-16 md:h-16"
-                      : chars.length >= 15
+                      : chars.values.length >= 15
                       ? "w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20"
-                      : chars.length >= 10
+                      : chars.values.length >= 10
                       ? "w-14 h-14 sm:w-16 sm:h-16 md:w-24 md:h-24"
                       : "w-16 h-16 sm:w-18 sm:h-18 md:w-24 md:h-24 lg:w-28 lg:h-28"
                   } bg-blue-500 rounded-full`}
