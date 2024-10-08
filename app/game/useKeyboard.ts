@@ -5,11 +5,13 @@ export default function useKeyboard({
   currentKeyWordIndex,
   keyWords,
   setCurrentInput,
+  checkGuess,
 }: {
   charValues: string[];
   currentKeyWordIndex: number;
   keyWords: string[];
   setCurrentInput: React.Dispatch<SetStateAction<string[]>>;
+  checkGuess: () => boolean;
 }) {
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -29,9 +31,18 @@ export default function useKeyboard({
           }
           return prev;
         });
+      } else if (event.key === "Escape") {
+        if (document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur();
+        }
+      } else if (event.key === "Enter") {
+        console.log("Check");
+        if (checkGuess()) {
+          setCurrentInput([]);
+        }
       }
     },
-    [charValues, currentKeyWordIndex, keyWords, setCurrentInput]
+    [charValues, checkGuess, currentKeyWordIndex, keyWords, setCurrentInput]
   );
 
   useEffect(() => {
