@@ -1,8 +1,15 @@
-export function getMoreChars(keyWord: string, count: number = 9) {
+export function getMoreChars({
+  keyWord,
+  charTarget = 9,
+}: {
+  keyWord: string;
+  charTarget?: number;
+}) {
   const alphaArray = "abcdefghijklmnopqrstuvwxyz".split("");
   const alphaSet = new Set(alphaArray);
 
-  const targetCount = count > 0 && count <= 26 ? Math.floor(count) : 9;
+  const targetCount =
+    charTarget > 0 && charTarget <= 26 ? Math.floor(charTarget) : 9;
 
   const strArray = keyWord.split("");
 

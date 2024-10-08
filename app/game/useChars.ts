@@ -11,15 +11,15 @@ export default function useChars({
   const [values, setValues] = useState<string[]>([]);
 
   useEffect(() => {
-    setValues(getMoreChars(keyWords[0], charTarget));
+    setValues(getMoreChars({ keyWord: keyWords[0], charTarget }));
   }, [charTarget, keyWords]);
 
   const get = (keyWordIndex: number, newCharTarget?: number) => {
     setValues(
-      getMoreChars(
-        keyWords[keyWordIndex],
-        newCharTarget ? newCharTarget : charTarget
-      )
+      getMoreChars({
+        keyWord: keyWords[keyWordIndex],
+        charTarget: newCharTarget ? newCharTarget : charTarget,
+      })
     );
   };
 
