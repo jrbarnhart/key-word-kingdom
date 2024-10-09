@@ -72,7 +72,16 @@ export default function GameBoard({
           <p className="flex flex-wrap gap-1">
             {displayChars.map((char, index) => (
               <span
-                className="border-b-2 border-white px-2 font-mono"
+                className={`border-b-2 border-white px-2 font-mono ${
+                  // Display chars and hint length should always be the same
+                  typeof currentInput[index] === "string" &&
+                  char.toLowerCase() === currentInput[index].toLowerCase() &&
+                  char.toLowerCase() === hint[index].toLowerCase()
+                    ? "text-yellow-600"
+                    : char.toLowerCase() === hint[index].toLowerCase()
+                    ? "text-green-500"
+                    : "text-neutral-50"
+                }`}
                 key={index}
               >
                 {char}
