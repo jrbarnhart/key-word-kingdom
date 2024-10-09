@@ -34,12 +34,14 @@ export default function GameBoard({
   const checkGuess = createCheckGuess({
     keyWord: keyWords[currentKeyWordIndex],
     keyWordCount,
+    currentKeyWordIndex,
     currentInput,
     guesses,
     wordArray,
     setScore: score.setValue,
     setGuesses,
     setHint,
+    setCurrentKeyWordIndex,
   });
 
   useKeyboard({
