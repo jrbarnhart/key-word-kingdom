@@ -36,7 +36,6 @@ export default function useKeyboard({
           document.activeElement.blur();
         }
       } else if (event.key === "Enter") {
-        console.log("Check");
         if (checkGuess()) {
           setCurrentInput([]);
         }
