@@ -36,6 +36,7 @@ export default function GameBoard({
     wordArray,
     setScore: score.setValue,
     setGuesses,
+    setHint,
   });
 
   useKeyboard({
