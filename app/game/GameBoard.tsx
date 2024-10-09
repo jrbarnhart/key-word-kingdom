@@ -33,6 +33,7 @@ export default function GameBoard({
   const checkGuess = createCheckGuess({
     keyWord: keyWords[currentKeyWordIndex],
     currentInput,
+    guesses,
     wordArray,
     setScore: score.setValue,
     setGuesses,
@@ -89,12 +90,18 @@ export default function GameBoard({
             ))}
           </p>
         </div>
-        <div className="bg-gray-800 rounded-lg p-4 mb-6 flex-grow h-full">
-          <ul className="text-blue-400 space-y-1">
-            {keyWords.map((word, index) => (
-              <p key={index}>{word[0].toUpperCase() + word.slice(1)}</p>
-            ))}
-          </ul>
+        <div className="bg-gray-800 rounded-lg p-4 mb-6 flex-grow h-full overflow-y-auto overflow-x-hidden">
+          <p className="text-blue-400 flex flex-wrap items-center gap-2 break-all">
+            {guesses.map((word, index) => {
+              if (word.length > 0) {
+                return (
+                  <span key={index}>
+                    {word[0].toUpperCase() + word.slice(1)}
+                  </span>
+                );
+              }
+            })}
+          </p>
         </div>
         <div className="h-full flex flex-col justify-end gap-3">
           <div className="h-full flex flex-wrap justify-center content-end gap-2">
