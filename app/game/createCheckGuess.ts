@@ -3,7 +3,7 @@ import { SetStateAction } from "react";
 export default function createCheckGuess({
   ...props
 }: {
-  keyWord: string;
+  keyWords: string[];
   keyWordCount: number;
   currentKeyWordIndex: number;
   currentInput: string[];
@@ -12,10 +12,10 @@ export default function createCheckGuess({
   setScore: React.Dispatch<SetStateAction<number>>;
   setGuesses: React.Dispatch<SetStateAction<string[]>>;
   setHint: React.Dispatch<SetStateAction<string[]>>;
-  setCurrentKeyWordIndex: React.Dispatch<SetStateAction<number>>;
+  startNextRound: () => void;
 }) {
   const {
-    keyWord,
+    keyWords,
     keyWordCount,
     currentKeyWordIndex,
     currentInput,
@@ -24,11 +24,12 @@ export default function createCheckGuess({
     setScore,
     setGuesses,
     setHint,
-    setCurrentKeyWordIndex,
+    startNextRound,
   } = props;
 
   return function checkGuess() {
     let isValidGuess = false;
+    const keyWord = keyWords[currentKeyWordIndex];
     const guess = currentInput.join("").toLowerCase();
     // If guess is keyWord
     if (guess === keyWord) {
@@ -40,9 +41,7 @@ export default function createCheckGuess({
         console.log("GAME WON!");
       } else {
         // Increment index and reset state for next round
-        setCurrentKeyWordIndex((prev) => prev + 1);
-        setHint((prev) => [...prev].fill("\u00A0"));
-        setGuesses([]);
+        startNextRound();
       }
     } else if (wordArray.includes(guess) && !guesses.includes(guess)) {
       // Else if guess in word array and not in guesses yet

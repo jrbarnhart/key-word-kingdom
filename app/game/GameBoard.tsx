@@ -18,22 +18,33 @@ export default function GameBoard({
   wordArray: string[];
 }) {
   const { keyWords, keyWordCount, wordArray } = props;
-  const chars = useChars({ keyWords, charTarget: 9 });
+
   const [currentKeyWordIndex, setCurrentKeyWordIndex] = useState(0);
   const [hint, setHint] = useState(keyWords[0].split("").map(() => "\u00A0"));
   const [currentInput, setCurrentInput] = useState<string[]>([]);
+  const [guesses, setGuesses] = useState<string[]>([]);
+
+  const chars = useChars({ keyWords, charTarget: 9 });
   const displayChars = useDisplayChars({
     currentInput,
     currentKeyWordIndex,
     hint,
     keyWords,
   });
-  const [guesses, setGuesses] = useState<string[]>([]);
   const timer = useTimer();
   const score = useScore();
 
+  const startNextRound = () => {
+    const oldKeyWordIndex = currentKeyWordIndex;
+    chars.get(oldKeyWordIndex + 1);
+    setCurrentKeyWordIndex((prev) => prev + 1);
+    setHint(keyWords[oldKeyWordIndex + 1].split("").map(() => "\u00A0"));
+    setCurrentInput([]);
+    setGuesses([]);
+  };
+
   const checkGuess = createCheckGuess({
-    keyWord: keyWords[currentKeyWordIndex],
+    keyWords,
     keyWordCount,
     currentKeyWordIndex,
     currentInput,
@@ -42,7 +53,7 @@ export default function GameBoard({
     setScore: score.setValue,
     setGuesses,
     setHint,
-    setCurrentKeyWordIndex,
+    startNextRound,
   });
 
   useKeyboard({
