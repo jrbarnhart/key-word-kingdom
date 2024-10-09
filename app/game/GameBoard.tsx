@@ -13,9 +13,10 @@ export default function GameBoard({
   ...props
 }: {
   keyWords: string[];
+  keyWordCount: number;
   wordArray: string[];
 }) {
-  const { keyWords, wordArray } = props;
+  const { keyWords, keyWordCount, wordArray } = props;
   const chars = useChars({ keyWords, charTarget: 9 });
   const [currentKeyWordIndex, setCurrentKeyWordIndex] = useState(0);
   const [hint, setHint] = useState(keyWords[0].split("").map(() => "\u00A0"));
@@ -32,6 +33,7 @@ export default function GameBoard({
 
   const checkGuess = createCheckGuess({
     keyWord: keyWords[currentKeyWordIndex],
+    keyWordCount,
     currentInput,
     guesses,
     wordArray,

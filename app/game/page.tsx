@@ -6,7 +6,9 @@ import getWords from "./getWords";
 export default async function Game() {
   const session = await auth();
 
-  const words = await getWords(3);
+  const TEMPkeyWordCount = 3;
+
+  const words = await getWords(TEMPkeyWordCount);
 
   if (!session?.user) {
     return (
@@ -19,5 +21,11 @@ export default async function Game() {
     );
   }
 
-  return <GameBoard keyWords={words.keyWords} wordArray={words.wordArray} />;
+  return (
+    <GameBoard
+      keyWords={words.keyWords}
+      keyWordCount={TEMPkeyWordCount}
+      wordArray={words.wordArray}
+    />
+  );
 }

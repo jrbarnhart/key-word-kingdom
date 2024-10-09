@@ -2,6 +2,7 @@ import { SetStateAction } from "react";
 
 export default function createCheckGuess({
   keyWord,
+  keyWordCount,
   currentInput,
   guesses,
   wordArray,
@@ -10,6 +11,7 @@ export default function createCheckGuess({
   setHint,
 }: {
   keyWord: string;
+  keyWordCount: number;
   currentInput: string[];
   guesses: string[];
   wordArray: string[];
@@ -21,7 +23,14 @@ export default function createCheckGuess({
     let isValidGuess = false;
     // See if current input is in wordarray and not in guesses
     const guess = currentInput.join("").toLowerCase();
-    if (wordArray.includes(guess) && !guesses.includes(guess)) {
+    // If it is keyWord
+    if (guess === keyWord) {
+      isValidGuess = true;
+      // Award score and time
+      // Increment the index
+      // Clear hint
+      // Clear guesses
+    } else if (wordArray.includes(guess) && !guesses.includes(guess)) {
       isValidGuess = true;
       // Award score and time
       setScore((prev) => prev + currentInput.length * 100);
@@ -38,7 +47,6 @@ export default function createCheckGuess({
       // Set guesses
       setGuesses((prev) => [...prev, guess]);
     }
-    // If it is keyWord
     // If it is neither
     return isValidGuess;
   };
