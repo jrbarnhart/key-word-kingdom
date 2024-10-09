@@ -94,10 +94,12 @@ export default function GameBoard({
                 className={`border-b-2 border-white px-2 font-mono ${
                   // Display chars and hint length should always be the same
                   typeof currentInput[index] === "string" &&
+                  typeof hint[index] === "string" &&
                   char.toLowerCase() === currentInput[index].toLowerCase() &&
                   char.toLowerCase() === hint[index].toLowerCase()
                     ? "text-yellow-600"
-                    : char.toLowerCase() === hint[index].toLowerCase()
+                    : typeof hint[index] === "string" &&
+                      char.toLowerCase() === hint[index].toLowerCase()
                     ? "text-green-500"
                     : "text-neutral-50"
                 }`}
