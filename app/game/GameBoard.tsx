@@ -8,6 +8,7 @@ import useKeyboard from "./useKeyboard";
 import useDisplayChars from "./useDisplayChars";
 import buttonHandlers from "./buttonHandlers";
 import createCheckGuess from "./createCheckGuess";
+import useDevCommands from "./useDevCommands";
 
 export default function GameBoard({
   ...props
@@ -59,6 +60,8 @@ export default function GameBoard({
       setCurrentInput,
       checkGuess,
     });
+
+  useDevCommands({ keyWords });
 
   return (
     <div className="text-white flex flex-col items-center">
