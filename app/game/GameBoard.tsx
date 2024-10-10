@@ -77,17 +77,17 @@ export default function GameBoard({
   return (
     <div className="text-white flex flex-col items-center">
       <div className="max-w-lg w-full h-screen flex flex-col p-4 ">
-        <div className="text-center mb-4">
+        <div className="text-center mb-2">
           <h1 className="mt-10 text-2xl font-bold">Key Word Kingdom</h1>
           <div className="flex justify-between text-sm">
             <p>Score: {score.value}</p>
             <p>{timer.formatted}</p>
           </div>
-          <p className="text-blue-400 text-sm">
+          <p className="text-purple-300 text-sm">
             KeyWord {currentKeyWordIndex + 1} / {keyWords.length}
           </p>
         </div>
-        <div className="flex justify-center space-x-2 text-2xl my-6">
+        <div className="flex justify-center space-x-2 text-2xl mb-6">
           <p className="flex flex-wrap gap-1">
             {displayChars.map((char, index) => (
               <span
