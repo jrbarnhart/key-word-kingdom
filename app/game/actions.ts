@@ -1,6 +1,6 @@
 "use server";
 
-import getWords from "./game/getWords";
+import getWords from "./getWords";
 
 export async function getWordsAction({
   ...options

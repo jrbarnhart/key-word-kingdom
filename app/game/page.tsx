@@ -1,14 +1,17 @@
 import { auth } from "@/auth";
 import LoginButton from "../_components/auth/LoginButton";
 import GameBoard from "./GameBoard";
-import getWords from "./getWords";
+import { getWordsAction } from "./actions";
 
 export default async function Game() {
   const session = await auth();
 
   const TEMPkeyWordCount = 3;
 
-  const words = await getWords(TEMPkeyWordCount);
+  const words = await getWordsAction({
+    totalKeyWords: TEMPkeyWordCount,
+    maxLength: 6,
+  });
 
   if (!session?.user) {
     return (
