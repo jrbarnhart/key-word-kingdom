@@ -140,7 +140,7 @@ export default function GameBoard({
                       : "w-16 h-16 sm:w-18 sm:h-18 md:w-24 md:h-24 lg:w-28 lg:h-28"
                   } bg-blue-500 rounded-full`}
                 >
-                  {char}
+                  {char.toUpperCase()}
                 </button>
               );
             })}
