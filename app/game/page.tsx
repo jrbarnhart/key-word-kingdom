@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import LoginButton from "../_components/auth/LoginButton";
 import GameBoard from "./GameBoard";
 import { getWordsAction } from "./actions";
+import NavBar from "../_components/nav/NavBar";
 
 export default async function Game() {
   const session = await auth();
@@ -25,10 +26,13 @@ export default async function Game() {
   }
 
   return (
-    <GameBoard
-      keyWords={words.keyWords}
-      keyWordCount={TEMPkeyWordCount}
-      wordArray={words.wordArray}
-    />
+    <>
+      <NavBar />
+      <GameBoard
+        keyWords={words.keyWords}
+        keyWordCount={TEMPkeyWordCount}
+        wordArray={words.wordArray}
+      />
+    </>
   );
 }
