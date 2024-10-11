@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default async function Home() {
   return (
-    <div className="flex flex-col items-center min-h-screen">
+    <div className="flex flex-col items-center min-h-screen p-2">
       <h1 className="mt-20 text-5xl font-bold text-white mb-8">
         Key Word Kingdom
       </h1>
