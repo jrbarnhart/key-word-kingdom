@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import NavBar from "./_components/nav/NavBar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,7 +32,6 @@ export default function RootLayout({
           aria-hidden
           className="fixed bg-gradient-to-b from-blue-600 to-purple-800 h-full w-full -z-10"
         />
-        <NavBar />
         {children}
       </body>
     </html>
