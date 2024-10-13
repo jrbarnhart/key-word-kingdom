@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function GameMenu() {
   const LENGTH_DEFAULT = 5;
   const TIMER_DEFAULT = 0;
-  const TOTAL_DEFAULT = 3;
+  const TOTAL_DEFAULT = 1;
 
   const [wordLength, setWordLength] = useState(LENGTH_DEFAULT);
   const [timer, setTimer] = useState(TIMER_DEFAULT);
@@ -53,15 +53,15 @@ export default function GameMenu() {
           <div className="flex gap-1 justify-between items-center bg-purple-300 border-2 h-12 border-blue-800 rounded-md p-1">
             <button
               onClick={() => setWordLength(5)}
-              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md ${
-                wordLength <= 5 ? "bg-sky-900 text-white" : "bg-sky-300"
+              className={`hover:bg-sky-300 border border-blue-500 h-full w-full px-2 rounded-md ${
+                wordLength <= 5 ? "bg-sky-900 text-white" : "bg-sky-500"
               }`}
             >
               Small
             </button>
             <button
               onClick={() => setWordLength(10)}
-              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md ${
+              className={` hover:bg-sky-300 border border-blue-500 h-full w-full px-2 rounded-md ${
                 wordLength > 5 && wordLength <= 10
                   ? "bg-sky-900 text-white"
                   : "bg-sky-500"
@@ -71,7 +71,7 @@ export default function GameMenu() {
             </button>
             <button
               onClick={() => setWordLength(15)}
-              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md ${
+              className={` hover:bg-sky-300 border border-blue-500 h-full w-full px-2 rounded-md ${
                 wordLength > 10 ? "bg-sky-900 text-white" : "bg-sky-500"
               }`}
             >
@@ -84,17 +84,26 @@ export default function GameMenu() {
           <h2>Timer</h2>
           <div className="flex gap-1 justify-between items-center bg-purple-300 border-2 h-12 border-blue-800 rounded-md p-1">
             <button
-              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
-            >
-              None
-            </button>
-            <button
-              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+              onClick={() => setTimer(0)}
+              className={`hover:bg-sky-300 border border-blue-500 h-full w-full px-2 rounded-md ${
+                timer === 0 ? "bg-sky-900 text-white" : "bg-sky-500"
+              }`}
             >
               Normal
             </button>
             <button
-              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+              onClick={() => setTimer(-1)}
+              className={`hover:bg-sky-300 border border-blue-500 h-full w-full px-2 rounded-md ${
+                timer < 0 ? "bg-sky-900 text-white" : "bg-sky-500"
+              }`}
+            >
+              None
+            </button>
+            <button
+              onClick={() => setTimer(60)}
+              className={`hover:bg-sky-300 border border-blue-500 h-full w-full px-2 rounded-md ${
+                timer > 0 ? "bg-sky-900 text-white" : "bg-sky-500"
+              }`}
             >
               Time Attack
             </button>
@@ -105,22 +114,38 @@ export default function GameMenu() {
           <h2>Total Key Words</h2>
           <div className="flex gap-1 justify-between items-center bg-purple-300 border-2 h-12 border-blue-800 rounded-md p-1">
             <button
-              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+              onClick={() => setTotalKeyWords(1)}
+              className={`hover:bg-sky-300 border border-blue-500 h-full w-full px-2 rounded-md ${
+                totalKeyWords === 1 ? "bg-sky-900 text-white" : "bg-sky-500"
+              }`}
             >
               1
             </button>
             <button
-              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+              onClick={() => setTotalKeyWords(3)}
+              className={`hover:bg-sky-300 border border-blue-500 h-full w-full px-2 rounded-md ${
+                totalKeyWords === 3 ? "bg-sky-900 text-white" : "bg-sky-500"
+              }`}
             >
               3
             </button>
             <button
-              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+              onClick={() => setTotalKeyWords(6)}
+              className={`hover:bg-sky-300 border border-blue-500 h-full w-full px-2 rounded-md ${
+                totalKeyWords === 6 ? "bg-sky-900 text-white" : "bg-sky-500"
+              }`}
             >
               6
             </button>
             <input
-              className="bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md placeholder:text-black text-center"
+              className={`hover:bg-sky-300 border border-blue-500 h-full w-full px-2 rounded-md placeholder:text-black text-center ${
+                totalKeyWords !== 1 &&
+                totalKeyWords !== 3 &&
+                totalKeyWords !== 6 &&
+                totalInputValue !== ""
+                  ? "bg-sky-900 text-white"
+                  : "bg-sky-500"
+              }`}
               placeholder="Custom"
               value={totalInputValue}
               onChange={handleTotalInput}
