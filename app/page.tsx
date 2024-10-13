@@ -6,10 +6,10 @@ export default async function Home() {
       <h1 className="mt-5 text-5xl font-bold text-white mb-8">
         Key Word Kingdom
       </h1>
-
-      <p className="text-lg text-gray-200 mb-10">
+      <p className="text-lg text-gray-200">
         Enter the kingdom and master the art of words!
       </p>
+      <div className="flex-grow max-h-24" aria-hidden />
 
       <GameMenu />
     </div>
