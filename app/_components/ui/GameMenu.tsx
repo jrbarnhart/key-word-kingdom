@@ -39,19 +39,31 @@ export default function GameMenu() {
       <button className="bg-yellow-500 hover:bg-yellow-300 border-2 border-neutral-700 rounded-md p-3 font-bold text-lg mt-3">
         {"Play Conquest(NYI)"}
       </button>
+      {/* Play Custom button */}
+      <div className=" border-t-4 border-neutral-700 w-full flex justify-center">
+        <button className="bg-yellow-500 hover:bg-yellow-300 border-2 border-neutral-700 rounded-md p-3 font-bold text-lg mt-3">
+          {"Play Custom"}
+        </button>
+      </div>
       {/* Custom Options */}
-      <div className="flex flex-col gap-1 w-full border-t-4 border-neutral-700 p-3">
+      <div className="flex flex-col gap-1 w-full p-3">
         {/* Length Options */}
         <div className="word length options container">
           <h2>Word Length</h2>
           <div className="flex gap-1 justify-between items-center bg-purple-300 border-2 h-12 border-blue-800 rounded-md p-1">
-            <button className="bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md">
+            <button
+              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+            >
               Small
             </button>
-            <button className="bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md">
+            <button
+              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+            >
               Med
             </button>
-            <button className="bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md">
+            <button
+              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+            >
               Long
             </button>
           </div>
@@ -60,13 +72,19 @@ export default function GameMenu() {
         <div className="timer options container">
           <h2>Timer</h2>
           <div className="flex gap-1 justify-between items-center bg-purple-300 border-2 h-12 border-blue-800 rounded-md p-1">
-            <button className="bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md">
+            <button
+              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+            >
               None
             </button>
-            <button className="bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md">
+            <button
+              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+            >
               Normal
             </button>
-            <button className="bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md">
+            <button
+              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+            >
               Time Attack
             </button>
           </div>
@@ -75,13 +93,19 @@ export default function GameMenu() {
         <div className="total keys options container">
           <h2>Total Key Words</h2>
           <div className="flex gap-1 justify-between items-center bg-purple-300 border-2 h-12 border-blue-800 rounded-md p-1">
-            <button className="bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md">
+            <button
+              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+            >
               1
             </button>
-            <button className="bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md">
+            <button
+              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+            >
               3
             </button>
-            <button className="bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md">
+            <button
+              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+            >
               6
             </button>
             <input
@@ -92,12 +116,6 @@ export default function GameMenu() {
             />
           </div>
         </div>
-      </div>
-      {/* Play Custom button */}
-      <div className="custom button area">
-        <button className="bg-yellow-500 hover:bg-yellow-300 border-2 border-neutral-700 rounded-md p-3 font-bold text-lg mb-3">
-          {"Play Custom"}
-        </button>
       </div>
     </div>
   );
