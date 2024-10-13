@@ -46,23 +46,34 @@ export default function GameMenu() {
         </button>
       </div>
       {/* Custom Options */}
-      <div className="flex flex-col gap-1 w-full p-3">
+      <div className="flex flex-col gap-1 w-full p-2">
         {/* Length Options */}
         <div className="word length options container">
           <h2>Word Length</h2>
           <div className="flex gap-1 justify-between items-center bg-purple-300 border-2 h-12 border-blue-800 rounded-md p-1">
             <button
-              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+              onClick={() => setWordLength(5)}
+              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md ${
+                wordLength <= 5 ? "bg-sky-900 text-white" : "bg-sky-300"
+              }`}
             >
               Small
             </button>
             <button
-              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+              onClick={() => setWordLength(10)}
+              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md ${
+                wordLength > 5 && wordLength <= 10
+                  ? "bg-sky-900 text-white"
+                  : "bg-sky-500"
+              }`}
             >
               Med
             </button>
             <button
-              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md`}
+              onClick={() => setWordLength(15)}
+              className={`bg-sky-500 border hover:bg-sky-300 border-blue-500 h-full w-full px-2 rounded-md ${
+                wordLength > 10 ? "bg-sky-900 text-white" : "bg-sky-500"
+              }`}
             >
               Long
             </button>
