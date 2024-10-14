@@ -1,11 +1,15 @@
 "use client";
 
+import { GameSession } from "@/app/_lib/types";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function GameMenu() {
   const LENGTH_DEFAULT = 5;
   const TIMER_DEFAULT = 0;
   const TOTAL_DEFAULT = 1;
+
+  const router = useRouter();
 
   const [wordLength, setWordLength] = useState(LENGTH_DEFAULT);
   const [timer, setTimer] = useState(TIMER_DEFAULT);
@@ -34,14 +38,34 @@ export default function GameMenu() {
     }
   };
 
+  const startCustomGame = (
+    wordLength: number,
+    timer: number,
+    totalKeyWords: number
+  ) => {
+    // Set local storage
+    const gameSession: GameSession = {
+      time: new Date().toISOString(),
+      options: { wordLength, timer, totalKeyWords },
+      data: { currentKeyWordIndex: 1, keyWords: [], guesses: [], hint: [] },
+    };
+    localStorage.setItem("gameSession", JSON.stringify(gameSession));
+    // Redirect with state
+    router.push("/game");
+  };
+
   return (
     <div className="w-full max-w-lg border-4 border-neutral-700 bg-gradient-to-t from-blue-500 to-purple-400 rounded-md flex flex-col items-center gap-3">
+      {/* Play Conquest button */}
       <button className="bg-yellow-500 hover:bg-yellow-300 border-2 border-neutral-700 rounded-md p-3 font-bold text-lg mt-3">
         {"Play Conquest(NYI)"}
       </button>
       {/* Play Custom button */}
       <div className=" border-t-4 border-neutral-700 w-full flex justify-center">
-        <button className="bg-yellow-500 hover:bg-yellow-300 border-2 border-neutral-700 rounded-md p-3 font-bold text-lg mt-3">
+        <button
+          onClick={() => startCustomGame(wordLength, timer, totalKeyWords)}
+          className="bg-yellow-500 hover:bg-yellow-300 border-2 border-neutral-700 rounded-md p-3 font-bold text-lg mt-3"
+        >
           {"Play Custom"}
         </button>
       </div>
