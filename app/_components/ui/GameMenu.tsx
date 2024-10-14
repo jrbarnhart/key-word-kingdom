@@ -50,8 +50,9 @@ export default function GameMenu() {
       data: { currentKeyWordIndex: 1, keyWords: [], guesses: [], hint: [] },
     };
     localStorage.setItem("gameSession", JSON.stringify(gameSession));
-    // Redirect with state
-    router.push("/game");
+    // Redirect with encoded params
+    const encodedParams = btoa(JSON.stringify(gameSession.options));
+    router.push(`/game?params=${encodedParams}`);
   };
 
   return (
