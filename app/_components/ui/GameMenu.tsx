@@ -52,7 +52,7 @@ export default function GameMenu() {
     localStorage.setItem("gameSession", JSON.stringify(gameSession));
     // Redirect with encoded params
     const encodedParams = btoa(JSON.stringify(gameSession.options));
-    router.push(`/game?params=${encodedParams}`);
+    router.push(`/game?options=${encodedParams}`);
   };
 
   return (
