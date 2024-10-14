@@ -3,15 +3,50 @@ import LoginButton from "../_components/auth/LoginButton";
 import GameBoard from "./GameBoard";
 import { getWordsAction } from "./actions";
 import NavBar from "../_components/nav/NavBar";
+import { z } from "zod";
+import { redirect } from "next/navigation";
 
-export default async function Game() {
+export default async function Game({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const session = await auth();
 
-  const TEMPkeyWordCount = 3;
+  let decodedParams;
+  if (typeof searchParams.options === "string") {
+    try {
+      console.log(searchParams);
+      decodedParams = JSON.parse(atob(searchParams.options));
+    } catch {
+      console.error("Invalid options params");
+      redirect("/");
+    }
+  }
+
+  const gameOptionsSchema = z.object({
+    wordLength: z.number(),
+    timer: z.number(),
+    totalKeyWords: z.number(),
+  });
+
+  const verifiedParams = gameOptionsSchema.safeParse(decodedParams);
+
+  let wordLength = 0,
+    timer = 0,
+    totalKeyWords = 0;
+  if (!verifiedParams.success) {
+    console.log("INVALID OPTIONS");
+    redirect("/");
+  } else {
+    wordLength = verifiedParams.data.wordLength;
+    timer = verifiedParams.data.timer;
+    totalKeyWords = verifiedParams.data.totalKeyWords;
+  }
 
   const words = await getWordsAction({
-    totalKeyWords: TEMPkeyWordCount,
-    maxLength: 6,
+    totalKeyWords,
+    maxLength: wordLength,
   });
 
   if (!session?.user) {
@@ -30,7 +65,7 @@ export default async function Game() {
       <NavBar />
       <GameBoard
         keyWords={words.keyWords}
-        keyWordCount={TEMPkeyWordCount}
+        keyWordCount={totalKeyWords}
         wordArray={words.wordArray}
       />
     </>
